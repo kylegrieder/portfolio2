@@ -3,3 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .nav-link {
+        @apply text-neutral-300 hover:text-neutral-50 transition-colors;
+    }
+    .nav-link.router-link-exact-active {
+        @apply text-neutral-50 font-semibold underline underline-offset-4;
+    }
+    .card {
+        @apply bg-neutral-900/60 rounded-2xl p-6 border border-neutral-700 text-left;
+    }
+    .pill {
+        @apply bg-neutral-700 text-neutral-100 text-sm rounded-full px-3 py-1 whitespace-nowrap;
+    }
+    .stat-card {
+        @apply bg-neutral-900/60 rounded-2xl p-4 border border-neutral-700 text-center;
+    }
+    .section-title {
+        @apply text-3xl font-semibold mb-6 text-center;
+    }
+    .link-pill {
+        @apply text-sm bg-neutral-700 hover:bg-neutral-600 transition-colors rounded-full px-3 py-1 whitespace-nowrap;
+    }
+}
+
