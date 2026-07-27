@@ -26,7 +26,7 @@ import NavBar from './components/NavBar.vue'
             <router-view />
         </main>
         <footer class="flex justify-center whitespace-pre-wrap">
-            <div class="align-middle text-center">kyle grieder&trade;</div>
+            <div class="align-middle text-center">kyle grieder</div>
             <div class="align-middle text-center">All rights reserved</div>
         </footer>
     </div>

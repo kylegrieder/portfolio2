@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const dlResume = 'https://drive.google.com/uc?export=download&id=1abpItLZDAZSdYC4hJNvwT9BXQ_VIyC7d'
+const dlResume = 'https://drive.google.com/uc?export=download&id=1lerCCIlI1fhryWvZ4mS8pURu6Hw7GrRO'
 
 const skills = [
     'Go', 'Vue.js', 'TypeScript', 'MySQL', 'Docker', 'AWS',
