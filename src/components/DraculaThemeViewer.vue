@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const screenshots = import.meta.glob('../assets/images/jetbrains_theme_screenshots/*.png', {
     eager: true,
@@ -32,6 +32,15 @@ const selectedVariant = ref(variants[0].key)
 const selectedLanguage = ref(languages[0].key)
 
 const currentScreenshot = computed(() => screenshotUrl(selectedLanguage.value, selectedVariant.value))
+
+const lightboxOpen = ref(false)
+
+function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') lightboxOpen.value = false
+}
+
+onMounted(() => window.addEventListener('keydown', handleKeydown))
+onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 </script>
 
 <template>
@@ -59,7 +68,26 @@ const currentScreenshot = computed(() => screenshotUrl(selectedLanguage.value, s
         <img
             :src="currentScreenshot"
             :alt="`${selectedVariant} theme in JetBrains, showing ${selectedLanguage} code`"
-            class="rounded-lg border border-neutral-700 w-full"
+            class="rounded-lg border border-neutral-700 w-full cursor-zoom-in"
+            @click="lightboxOpen = true"
         >
+
+        <div
+            v-if="lightboxOpen"
+            class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 cursor-zoom-out"
+            @click="lightboxOpen = false"
+        >
+            <button
+                type="button"
+                class="absolute top-4 right-4 text-neutral-200 hover:text-white text-3xl leading-none"
+                @click="lightboxOpen = false"
+            >&times;</button>
+            <img
+                :src="currentScreenshot"
+                :alt="`${selectedVariant} theme in JetBrains, showing ${selectedLanguage} code`"
+                class="max-w-full max-h-full rounded-lg cursor-auto"
+                @click.stop
+            >
+        </div>
     </div>
 </template>

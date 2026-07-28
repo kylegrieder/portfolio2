@@ -1,15 +1,60 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import defaultPhoto from '../assets/images/kyle.grieder.png'
+import angelsGamePhoto from '../assets/images/kyle.grieder_angels_game.jpg'
+import beardPhoto from '../assets/images/kyle.grieder_beard.jpg'
+
 const dlResume = 'https://drive.google.com/uc?export=download&id=1lerCCIlI1fhryWvZ4mS8pURu6Hw7GrRO'
 
 const skills = [
     'Go', 'Vue.js', 'TypeScript', 'MySQL', 'Docker', 'AWS',
     'Claude Code', 'GitHub Copilot', 'OpenCode', 'Gemini CLI'
 ]
+
+const photos = [defaultPhoto, angelsGamePhoto, beardPhoto]
+const currentPhotoIndex = ref(0)
+const ROTATE_INTERVAL_MS = 60_000
+let rotateTimer: ReturnType<typeof setTimeout> | undefined
+
+function scheduleRotate() {
+    clearTimeout(rotateTimer)
+    rotateTimer = setTimeout(() => {
+        currentPhotoIndex.value = (currentPhotoIndex.value + 1) % photos.length
+        scheduleRotate()
+    }, ROTATE_INTERVAL_MS)
+}
+
+function nextPhoto() {
+    currentPhotoIndex.value = (currentPhotoIndex.value + 1) % photos.length
+    scheduleRotate()
+}
+
+function prevPhoto() {
+    currentPhotoIndex.value = (currentPhotoIndex.value - 1 + photos.length) % photos.length
+    scheduleRotate()
+}
+
+onMounted(scheduleRotate)
+onUnmounted(() => clearTimeout(rotateTimer))
 </script>
 
 <template>
     <div class="flex flex-col items-center space-y-8 max-w-3xl mx-auto">
-        <img class="rounded-2xl max-h-[40vh]" src="../assets/images/kyle.grieder.png" alt="me">
+        <div class="relative">
+            <img class="rounded-2xl max-h-[40vh]" :src="photos[currentPhotoIndex]" alt="me">
+            <button
+                type="button"
+                aria-label="Previous photo"
+                class="absolute left-2 top-1/2 -translate-y-1/2 bg-neutral-900/60 hover:bg-neutral-700 transition-colors rounded-full w-8 h-8 flex items-center justify-center text-lg"
+                @click="prevPhoto"
+            >‹</button>
+            <button
+                type="button"
+                aria-label="Next photo"
+                class="absolute right-2 top-1/2 -translate-y-1/2 bg-neutral-900/60 hover:bg-neutral-700 transition-colors rounded-full w-8 h-8 flex items-center justify-center text-lg"
+                @click="nextPhoto"
+            >›</button>
+        </div>
 
         <p class="text-center text-neutral-200 leading-relaxed">
             Engineering leader at Arivo Acceptance, where I lead a team of 7 engineers plus a dedicated PM and
