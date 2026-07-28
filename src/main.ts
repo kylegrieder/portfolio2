@@ -14,6 +14,21 @@ const routerOptions: RouterOptions = {
             component: () => import('./views/Home.vue')
         },
         {
+            path: '/projects',
+            name: 'Projects',
+            component: () => import('./views/Projects.vue')
+        },
+        {
+            path: '/case-studies',
+            name: 'CaseStudies',
+            component: () => import('./views/CaseStudies.vue')
+        },
+        {
+            path: '/leadership',
+            name: 'Leadership',
+            component: () => import('./views/Leadership.vue')
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: '404',
             component: () => import('./views/404.vue')
