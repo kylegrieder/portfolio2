@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DraculaThemeViewer from '../components/DraculaThemeViewer.vue'
+
 interface ProjectLink {
     label: string
     href: string
@@ -10,7 +12,6 @@ interface Project {
     stack: string
     description: string
     links: ProjectLink[]
-    note?: string
 }
 
 const projects: Project[] = [
@@ -36,18 +37,6 @@ const projects: Project[] = [
             { label: 'PR #5363 — Speedtest Tracker', href: 'https://github.com/homarr-labs/homarr/pull/5363' },
             { label: 'PR #5492 — Auto theme mode', href: 'https://github.com/homarr-labs/homarr/pull/5492' }
         ]
-    },
-    {
-        name: 'Dracula Pro (JetBrains)',
-        role: 'Contributor, Dracula Team',
-        stack: 'JetBrains Theming API',
-        description: 'Ported all 7 official Dracula variants — Pro, Blade, Buffy, Lincoln, Morbius, Van ' +
-            'Helsing, and Alucard — to JetBrains\' theming API. The free edition of Dracula has 23k+ GitHub ' +
-            'stars.',
-        note: 'The Pro repo is private/commercial, so it isn\'t linkable here.',
-        links: [
-            { label: 'Dracula Pro', href: 'https://draculatheme.com/pro' }
-        ]
     }
 ]
 </script>
@@ -62,7 +51,6 @@ const projects: Project[] = [
                 <div class="text-sm text-neutral-400">{{ project.role }} · {{ project.stack }}</div>
             </div>
             <p class="text-neutral-200 leading-relaxed">{{ project.description }}</p>
-            <p v-if="project.note" class="text-sm text-neutral-500 italic">{{ project.note }}</p>
             <div class="flex flex-wrap gap-2">
                 <a
                     v-for="link in project.links"
@@ -71,6 +59,27 @@ const projects: Project[] = [
                     target="_blank"
                     class="link-pill"
                 >{{ link.label }}</a>
+            </div>
+        </div>
+
+        <div class="card space-y-3">
+            <div>
+                <div class="text-xl font-semibold">Dracula Pro (JetBrains)</div>
+                <div class="text-sm text-neutral-400">Contributor, Dracula Team · JetBrains Theming API</div>
+            </div>
+            <p class="text-neutral-200 leading-relaxed">
+                Theme design and original Dracula palette are by the Dracula Team — my contribution was
+                porting all 7 official variants (Pro, Blade, Buffy, Lincoln, Morbius, Van Helsing, and
+                Alucard) to JetBrains' theming API and building support for JetBrains' new Islands UI style.
+                The free edition of Dracula has 23k+ GitHub stars.
+            </p>
+            <p class="text-sm text-neutral-500 italic">
+                The Pro repo is private/commercial, so it isn't linkable here. Screenshots below are real
+                captures of the port running in JetBrains IDEs.
+            </p>
+            <DraculaThemeViewer />
+            <div class="flex flex-wrap gap-2">
+                <a href="https://draculatheme.com/pro" target="_blank" class="link-pill">Dracula Pro</a>
             </div>
         </div>
     </div>
