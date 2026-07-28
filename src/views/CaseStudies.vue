@@ -56,7 +56,10 @@ const caseStudies: CaseStudy[] = [
 <template>
     <div class="max-w-3xl mx-auto space-y-6">
         <h1 class="section-title">Case Studies</h1>
-        <p class="text-center text-neutral-400 -mt-4">Systems built while leading engineering at Arivo Acceptance.</p>
+        <p class="text-center text-neutral-400 -mt-4">
+            Systems built while leading engineering at
+            <a href="https://arivo.com" target="_blank" class="underline hover:text-neutral-200">Arivo Acceptance</a>.
+        </p>
 
         <div v-for="study in caseStudies" :key="study.name" class="card space-y-3">
             <div class="text-xl font-semibold">{{ study.name }}</div>
