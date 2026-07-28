@@ -1,16 +1,5 @@
 <script setup lang="ts">
-interface Stat {
-    label: string
-    value: string
-}
-
-const turnaroundStats: Stat[] = [
-    { label: 'Cycle time', value: '−35%' },
-    { label: 'Defect intake', value: '−51%' },
-    { label: 'Planned delivery', value: '+77%' },
-    { label: 'Tech-debt remediation', value: '~9x' },
-    { label: 'Team growth', value: '4 → 7 reports' }
-]
+import TeamCultureCharts from '../components/TeamCultureCharts.vue'
 </script>
 
 <template>
@@ -31,14 +20,9 @@ const turnaroundStats: Stat[] = [
         <div class="space-y-4">
             <div class="text-xl font-semibold text-center">Team Culture Turnaround</div>
             <p class="text-neutral-400 text-center -mt-2">
-                Results from rebuilding process and culture on the COFI team.
+                COFI team · H1 2025 vs H1 2026 · 802 delivered issues from Jira project CO.
             </p>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                <div v-for="stat in turnaroundStats" :key="stat.label" class="stat-card">
-                    <div class="text-2xl font-semibold">{{ stat.value }}</div>
-                    <div class="text-xs text-neutral-400 mt-1">{{ stat.label }}</div>
-                </div>
-            </div>
+            <TeamCultureCharts />
         </div>
     </div>
 </template>
